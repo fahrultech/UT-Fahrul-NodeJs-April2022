@@ -1,5 +1,6 @@
 const generateToken = require('../../utils/generateToken')
-const User = require('../../models/user')
+const User = require('../../service/user.service')
+
 
 // @dec     Auth user & get token
 // @route   POST /api/users/login
@@ -36,25 +37,23 @@ exports.registerUser = async (req, res) => {
     try {
         const { name, password, email } = req.body
 
-        const userExists = await User.findOne({ email })
+        const user = new User()
+        
+        const userExists = await user.findOne(email)
 
-        if(userExists){
+        if(userExists.data.length > 0){
             return res.status(400).json({"msg":"User already exists"})
         }
-
-        const user = await User.create(req.body)
-
-        if(user){
-            res.status(201).json({
-                _id: user._id,
-                name: user.name,
-                email : user.email,
-                isAdmin : user.isAdmin,
-                token : generateToken(user._id)
-            })
-        }else{
-            return res.status(400).json({"msg":"Invalid user data"})
-        }
+        
+        const newUser = await user.createUser(req.body)
+        return res.status(200).json({
+            _id : newUser.id,
+            name : newUser.name,
+            email : newUser.email,
+            isAdmin : newUser.isAdmin,
+            token : generateToken(newUser.id)
+        });
+       
     } catch (error) {
         console.log(error)
         return res.status(500).json({"msg":"Internal server error"})
