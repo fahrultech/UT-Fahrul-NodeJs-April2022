@@ -1,0 +1,246 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API Test",
+        "description": "",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "host": "localhost:4000",
+    "basePath": "/api/v1",
+    "paths": {
+        "/customer/register": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "registercustomer",
+                "tags": [
+                    "customer"
+                ],
+                "summary": "Customer Register API",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "type": "string",
+                        "default": "0",
+                        "schema": {
+                            "$ref": "#definitions/Register"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Parameter is Empty"
+                    },
+                    "404": {
+                        "description": "Result is empty"
+                    }
+                }
+            }
+        },
+        "/customer/login": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "logincustomer",
+                "tags": [
+                    "customer"
+                ],
+                "summary": "Customer Login API",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "type": "string",
+                        "default": "0",
+                        "schema": {
+                            "$ref": "#definitions/Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Parameter is Empty"
+                    },
+                    "404": {
+                        "description": "Result is empty"
+                    }
+                }
+            }
+        },
+        "/admin/register": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "registeradmin",
+                "tags": [
+                    "admin"
+                ],
+                "summary": "Admin Register API",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "type": "string",
+                        "default": "0",
+                        "schema": {
+                            "$ref": "#definitions/Register"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Parameter is Empty"
+                    },
+                    "404": {
+                        "description": "Result is empty"
+                    }
+                }
+            }
+        },
+        "/admin/login": {
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "loginadmin",
+                "tags": [
+                    "admin"
+                ],
+                "summary": "Admin Login API",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "type": "string",
+                        "default": "0",
+                        "schema": {
+                            "$ref": "#definitions/Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Parameter is Empty"
+                    },
+                    "404": {
+                        "description": "Result is empty"
+                    }
+                }
+            }
+        },
+        "/message/customer": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "messagecustomer",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "message"
+                ],
+                "summary": "Customer Message API",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Parameter is Empty"
+                    },
+                    "404": {
+                        "description": "Result is empty"
+                    }
+                }
+            }
+        },
+        "/message/admin": {
+            "get": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "messageadmin",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "message"
+                ],
+                "summary": "Admin Message API",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Parameter is Empty"
+                    },
+                    "404": {
+                        "description": "Result is empty"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "bearerAuth": {
+            "type": "apiKey",
+            "description" : "JWT Toke Authorization. Example : Bearer {token}",
+            "name" : "Authorization",
+            "in" : "Header",
+            "scheme": "Bearer",
+            "bearerFormat": "JWT"
+        }
+    },
+    "definitions": {
+        "Register": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "User"
+                },
+                "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "admin@admin.com"
+                },
+                "password": {
+                    "type": "string",
+                    "format": "password"
+                }
+            }
+        },
+        "Login": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "admin@admin.com"
+                },
+                "password": {
+                    "type": "string",
+                    "format": "password"
+                }
+            }
+        }
+    }
+}
