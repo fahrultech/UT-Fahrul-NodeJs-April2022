@@ -6,21 +6,21 @@ const User = require('../../service/user.service')
 // @route   POST /api/users/login
 // @access  Public
 
-exports.authUser = async (req, res) => {
+exports.authAdmin = async (req, res) => {
     try {
-        const { email, password } = req.body
+        const { email } = req.body;
 
-        const user = new User
+        const user = new User;
 
-        const signinUser = await user.authUser(req.body)
-        
-        if (signinUser.length === 1) {
+        const signinAdmin = await user.authUser(req.body)
+
+        if (signinAdmin.length === 1) {
             res.json({
-                _id: signinUser[0].id,
-                name: signinUser[0].name,
-                email: signinUser[0].email,
-                isAdmin: signinUser[0].isAdmin,
-                token: generateToken(signinUser[0].id)
+                _id: signinAdmin[0].id,
+                name: signinAdmin[0].name,
+                email: signinAdmin[0].email,
+                isAdmin: signinAdmin[0].isAdmin,
+                token: generateToken(signinAdmin[0].id)
             })
         } else {
             return res.status(401).json({"msg":"Invalid email or password"})
@@ -35,13 +35,13 @@ exports.authUser = async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 
-exports.registerUser = async (req, res) => {
+exports.registerAdmin = async (req, res) => {
     try {
         const { name, password, email } = req.body
-
+        
+        req.body.isAdmin = 1;
+        
         const user = new User()
-
-        req.body.isAdmin = 0;
         
         const userExists = await user.findOne(email)
 

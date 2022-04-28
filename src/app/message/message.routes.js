@@ -1,9 +1,10 @@
 const express = require('express')
-const { getMessage } = require('./message.controller')
+const { getCustomerMessage, getAdminMessage } = require('./message.controller')
 const router = express.Router()
-const { protect, admin } = require('../../middleware/authMiddleware')
+const { protect, customer, admin } = require('../../middleware/authMiddleware')
 
 
-router.route('/').get(protect,getMessage)
+router.route('/customer').get(protect,customer,getCustomerMessage)
+router.route('/admin').get(protect,admin,getAdminMessage)
 
 module.exports = router
