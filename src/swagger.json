@@ -25,7 +25,6 @@
                         "name": "body",
                         "in": "body",
                         "type": "string",
-                        "default": "0",
                         "schema": {
                             "$ref": "#definitions/Register"
                         }
@@ -215,13 +214,11 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string",
-                    "example": "User"
+                    "type": "string"
                 },
                 "email": {
                     "type": "string",
-                    "format": "email",
-                    "example": "admin@admin.com"
+                    "format": "email"
                 },
                 "password": {
                     "type": "string",
@@ -233,12 +230,10 @@
             "type": "object",
             "properties": {
                 "email": {
-                    "type": "string",
-                    "example": "admin@admin.com"
+                    "type": "string"
                 },
                 "password": {
-                    "type": "string",
-                    "format": "password"
+                    "type": "string"
                 }
             }
         }
