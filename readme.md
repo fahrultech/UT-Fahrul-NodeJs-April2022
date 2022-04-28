@@ -12,6 +12,11 @@ This is the project test for Ulven Tech Nodejs developer
 - You need to have node.js installed in your computer
 
 ## Usage
+## Clone the repository
+Clone this repository using comman below
+```
+git clone git@github.com:fahrultech/UT-Fahrul-NodeJs-April2022.git
+```
 
 ### Env Variables
 Create .env file in the root and add following
