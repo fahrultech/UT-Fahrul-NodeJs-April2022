@@ -1,7 +1,7 @@
 const generateToken = require('../../utils/generateToken')
 const User = require('../../service/user.service')
 const { validationResult } = require('express-validator')
-const req = require('express/lib/request')
+require('dotenv').config();
 
 // @dec     Auth user & get token
 // @route   POST /api/users/login
@@ -61,11 +61,17 @@ exports.register = async (req, res) => {
             req.body.isAdmin = 0;
         }
 
+        if(!process.env.JWT_TOKEN_KEY || process.env.JWT_TOKEN_KEY === ''){
+
+            return res.status(400).json({errors:{msg:"Please provide JWT_TOKEN_KEY in .env"}})
+        }
+
         const userExists = await user.findOne(email)
 
         if (userExists.data.length > 0) {
             return res.status(400).json({ "errors": { "msg": "User already exists", "param": "email" } })
         }
+        
 
         const newUser = await user.createUser(req.body);
 
